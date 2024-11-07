@@ -37,8 +37,8 @@ pipeline
                     . preflight_qeff/bin/activate
                     export TOKENIZERS_PARALLELISM=false
                     export QEFF_HOME=$PWD  
-                    pytest tests -m "not cli and not on_qaic" -n auto --junitxml=tests/tests_log.xml --ingore tests/vllm &
-                    pytest tests -m "not cli and on_qaic" -n 4 --junitxml=tests/tests_log2.xml --ignore tests/vllm &
+                    pytest tests -m "not cli and not on_qaic" -n auto --ignore tests/vllm --junitxml=tests/tests_log.xml  &
+                    pytest tests -m "not cli and on_qaic" -n 4 --ignore tests/vllm --junitxml=tests/tests_log2.xml &
                     wait
                     junitparser merge tests/tests_log.xml tests/tests_log2.xml tests/tests_log.xml
                     pytest tests -m cli --ignore tests/vllm --junitxml=tests/tests_log3.xml
